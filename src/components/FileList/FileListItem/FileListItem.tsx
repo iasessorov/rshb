@@ -3,6 +3,7 @@ import { Item } from "../../../classes/Item";
 import { useAppStore } from "../../../store";
 import styles from "./styles.module.css";
 import { Favorite } from "../../Buttons/Favorite";
+import { useNavigate } from "react-router-dom";
 
 const getIcon = (file: Item) => {
   const isDir = file.type === "dir";
@@ -20,12 +21,14 @@ const getIcon = (file: Item) => {
 };
 
 export const FileListItem = (file: Item) => {
+  const navigate = useNavigate();
+
   const { addFavorite, removeFavorite } = useAppStore();
   const isDir = file.type === "dir";
 
   const onClickHandler = () => {
     if (isDir) {
-      console.log("navigate");
+      navigate(`/${file.id}`);
     }
   };
 

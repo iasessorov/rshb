@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import { FileListHeader } from "./FileListHeader";
 
 interface FileListProps {
-  files: Item | undefined;
+  files?: Item;
 }
 
 export const FileList = ({ files }: FileListProps) => {

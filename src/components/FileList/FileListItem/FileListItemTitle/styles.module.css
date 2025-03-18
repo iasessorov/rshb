@@ -1,0 +1,12 @@
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+
+  &.dir {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

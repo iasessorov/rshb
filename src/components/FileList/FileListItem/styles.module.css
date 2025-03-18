@@ -1,0 +1,28 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #efefef;
+  padding: 8px 0;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.favoriteButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  & .enabled {
+    color: #333;
+  }
+
+  & .disabled {
+    color: #ccc;
+  }
+}

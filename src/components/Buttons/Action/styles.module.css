@@ -1,0 +1,26 @@
+.action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.yellow {
+    background-color: #f0d911;
+  }
+
+  &.lime {
+    background-color: #a4d127;
+  }
+
+  &.green {
+    color: #ffffff;
+    background-color: #008000;
+  }
+}

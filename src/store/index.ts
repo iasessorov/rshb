@@ -12,8 +12,7 @@ interface AppStore {
   favorites: FileId[];
   isLoading: boolean;
   getFiles: () => void;
-  addFavorite: (id: FileId) => void;
-  removeFavorite: (id: FileId) => void;
+  toggleFavorite: (id: FileId) => void;
 }
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -35,35 +34,19 @@ export const useAppStore = create<AppStore>((set) => ({
     set({ isLoading: false });
   },
 
-  addFavorite: (id) => {
+  toggleFavorite: (id) => {
     set((state) => ({
-      favorites: [...state.favorites, id],
+      favorites: state.favorites.includes(id)
+        ? state.favorites.filter((favorite) => favorite !== id)
+        : [...state.favorites, id],
     }));
     set((state) => ({
       data: state.data.map((file) =>
-        file.id === id ? { ...file, isFavorite: true } : file
+        file.id === id ? { ...file, isFavorite: !file.isFavorite } : file
       ),
     }));
-    set((state) => {
-      return {
-        files: normalizeData(state.data),
-      };
-    });
-  },
-
-  removeFavorite: (id) => {
     set((state) => ({
-      favorites: state.favorites.filter((favorite) => favorite !== id),
+      files: normalizeData(state.data),
     }));
-    set((state) => ({
-      data: state.data.map((file) =>
-        file.id === id ? { ...file, isFavorite: false } : file
-      ),
-    }));
-    set((state) => {
-      return {
-        files: normalizeData(state.data),
-      };
-    });
   },
 }));

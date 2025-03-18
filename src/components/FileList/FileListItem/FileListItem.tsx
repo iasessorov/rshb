@@ -23,7 +23,7 @@ const getIcon = (file: Item) => {
 export const FileListItem = (file: Item) => {
   const navigate = useNavigate();
 
-  const { addFavorite, removeFavorite } = useAppStore();
+  const { toggleFavorite } = useAppStore();
   const isDir = file.type === "dir";
 
   const onClickHandler = () => {
@@ -45,13 +45,7 @@ export const FileListItem = (file: Item) => {
 
       <Favorite
         isFavorite={file.isFavorite}
-        onClick={() => {
-          if (file.isFavorite) {
-            removeFavorite(file.id);
-          } else {
-            addFavorite(file.id);
-          }
-        }}
+        onClick={() => toggleFavorite(file.id)}
       />
     </li>
   );

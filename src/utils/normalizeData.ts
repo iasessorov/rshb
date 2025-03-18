@@ -1,13 +1,16 @@
 import { File } from "../data";
-import { Item } from "../classes/Item";
+import { isDir, DirItem } from "../classes/Dir";
+import { FileItem } from "../classes/File";
 
 export type NormalizedData = {
-  [key: number]: Item;
+  [key: number]: FileItem | DirItem;
 };
 
 export const normalizeData = (data: File[]) => {
   const result: NormalizedData = data.reduce((acc, item) => {
-    return { ...acc, [item.id]: new Item(item) };
+    const normalizedItem = isDir(item) ? new DirItem(item) : new FileItem(item);
+
+    return { ...acc, [item.id]: normalizedItem };
   }, {});
 
   data.forEach((item) => {

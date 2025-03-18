@@ -4,16 +4,15 @@ import { useAppStore } from "../../../store";
 import styles from "./styles.module.css";
 import { Favorite } from "../../Buttons/Favorite";
 import { useNavigate } from "react-router-dom";
+import { isDir } from "../../../classes/Dir";
+import { isFile } from "../../../classes/File";
 
 const getIcon = (file: Item) => {
-  const isDir = file.type === "dir";
-  const isFile = file.type === "file";
-
-  if (isDir) {
+  if (isDir(file)) {
     return <Folder size={32} color="#fdcf2b" weight="fill" />;
   }
 
-  if (isFile && file.isImage()) {
+  if (isFile(file)) {
     return <FileImage size={32} color="#3c76c3" weight="fill" />;
   }
 
@@ -24,10 +23,9 @@ export const FileListItem = (file: Item) => {
   const navigate = useNavigate();
 
   const { toggleFavorite } = useAppStore();
-  const isDir = file.type === "dir";
 
   const onClickHandler = () => {
-    if (isDir) {
+    if (isDir(file)) {
       navigate(`/${file.id}`);
     }
   };
@@ -35,7 +33,7 @@ export const FileListItem = (file: Item) => {
   return (
     <li className={styles.item}>
       <div
-        className={`${styles.fileWrapper} ${isDir ? styles.dir : ""}`}
+        className={`${styles.fileWrapper} ${isDir(file) ? styles.dir : ""}`}
         onClick={onClickHandler}
       >
         {getIcon(file)}

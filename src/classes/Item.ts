@@ -1,23 +1,21 @@
-import { File } from "../data";
-
-export class Item {
+export type ItemData = {
   id: number;
-  type: "dir" | "file";
   parentId: number | null;
   name: string;
   isFavorite: boolean;
-  children: Item[];
+};
 
-  constructor(file: File) {
-    this.id = file.id;
-    this.type = file.type;
-    this.parentId = file.parentId;
-    this.name = file.name;
-    this.isFavorite = file.isFavorite;
-    this.children = [];
+export abstract class Item {
+  id: number;
+  parentId: number | null;
+  name: string;
+  isFavorite: boolean;
+  abstract type: "dir" | "file";
+
+  constructor(data: ItemData) {
+    this.id = data.id;
+    this.parentId = data.parentId;
+    this.name = data.name;
+    this.isFavorite = data.isFavorite;
   }
-
-  isImage = () => {
-    return this.name.endsWith(".jpg") || this.name.endsWith(".png");
-  };
 }

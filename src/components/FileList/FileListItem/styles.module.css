@@ -7,17 +7,6 @@
   padding: 8px 0;
 }
 
-.fileWrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-
-  &.dir {
-    cursor: pointer;
-  }
-}
-
 .name {
   font-size: 14px;
   font-weight: 500;

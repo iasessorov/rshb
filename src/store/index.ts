@@ -26,12 +26,12 @@ export const useAppStore = create<AppStore>((set) => ({
 
     const data = await getData();
 
-    set({ data });
-    set({ files: normalizeData(data) });
     set({
+      data,
+      files: normalizeData(data),
       favorites: data.filter((file) => file.isFavorite).map((file) => file.id),
+      isLoading: false,
     });
-    set({ isLoading: false });
   },
 
   toggleFavorite: (id) => {
